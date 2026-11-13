@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sreeraj R. — Python Developer & Full-Stack Developer. Order in the Chaos. Spatial portfolio inspired by high-end creative engineering.">
+    <meta name="theme-color" content="#070708">
+    
+    <title>Sreeraj R. // Order in the Chaos — Python & Full-Stack Developer</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Three.js 3D WebGL Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ===================================================================
+         CUSTOM KINETIC CURSOR
+         =================================================================== -->
+    <div id="cursor-dot" class="cursor-dot" aria-hidden="true"></div>
+    <div id="cursor-ring" class="cursor-ring" aria-hidden="true"></div>
+    <div id="cursor-label" class="cursor-label" aria-hidden="true"></div>
+
+    <!-- ===================================================================
+         BACKGROUND WEBGL / 2D PARTICLE CANVAS & GRID
+         =================================================================== -->
+    <canvas id="chaos-canvas" aria-hidden="true"></canvas>
+    <div class="bg-grid-overlay" aria-hidden="true"></div>
+    <div class="ambient-glow glow-amber" aria-hidden="true"></div>
+    <div class="ambient-glow glow-blue" aria-hidden="true"></div>
+
+    <!-- ===================================================================
+         MAIN APPLICATION WRAPPER
+         =================================================================== -->
+    <div class="site-wrapper">
+
+        <!-- ===============================================================
+             HUD HEADER & SYSTEM TELEMETRY
+             =============================================================== -->
+        <header class="hud-header">
+            <div class="container hud-nav-inner">
+                
+                <!-- BRAND / CALLSIGN -->
+                <div class="hud-brand">
+                    <a href="#home" class="callsign" data-cursor="HOME">
+                        SREERAJ<span>.R</span>
+                    </a>
+                    <div class="status-badge">
+                        <span class="status-beacon"></span>
+                        <span>AVAILABLE FOR HIRE</span>
+                    </div>
+                </div>
+
+                <!-- LIVE TELEMETRY TICKER -->
+                <div class="hud-telemetry" aria-hidden="true">
+                    <div class="telemetry-item">
+                        <span>TIME:</span>
+                        <b id="hud-time">--:--:-- IST</b>
+                    </div>
+                    <div class="telemetry-item">
+                        <span>LOC:</span>
+                        <b>9.17° N, 76.73° E</b>
+                    </div>
+                    <div class="telemetry-item">
+                        <span>STATE:</span>
+                        <b id="hud-order-status">EQUILIBRIUM [ORDER]</b>
+                    </div>
+                </div>
+
+                <!-- CONTROLS & NAVIGATION -->
+                <div class="hud-controls">
+                    <!-- AUDIO FX TOGGLE -->
+                    <button id="sound-toggle" class="hud-btn" title="Toggle audio feedback" data-cursor="AUDIO">
+                        <span class="sound-bars" aria-hidden="true">
+                            <span class="sound-bar"></span>
+                            <span class="sound-bar"></span>
+                            <span class="sound-bar"></span>
+                        </span>
+                        <span class="sound-label">SOUND: OFF</span>
+                    </button>
+
+                    <!-- SHOCK TRIGGER BUTTON -->
+                    <button class="hud-btn hud-btn-shock trigger-shock-btn" title="Disrupt particle matrix" data-cursor="SHOCK">
+                        <span>BREAK ORDER</span>
+                        <span>⚡</span>
+                    </button>
+
+                    <!-- DESKTOP NAV -->
+                    <nav class="hud-nav-links">
+                        <a href="#about" class="hud-nav-link" data-cursor="EXPLORE"><span>01</span>What I Do</a>
+                        <a href="#path" class="hud-nav-link" data-cursor="JOURNEY"><span>02</span>Path</a>
+                        <a href="#skills" class="hud-nav-link" data-cursor="STACK"><span>03</span>Matrix</a>
+                        <a href="#platforms" class="hud-nav-link" data-cursor="PROFILES"><span>04</span>Profiles</a>
+                        <a href="#contact" class="hud-nav-link" data-cursor="CONNECT"><span>05</span>Initiate</a>
+                    </nav>
+
+                    <!-- MOBILE TOGGLE -->
+                    <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+
+            </div>
+        </header>
+
+
+        <!-- ===============================================================
+             MAIN STAGE CONTENT
+             =============================================================== -->
+        <main>
+
+            <!-- ===========================================================
+                 HERO SECTION // "ORDER IN THE CHAOS"
+                 =========================================================== -->
+            <section id="home" class="hero-stage">
+                <div class="container hero-grid">
+
+                    <!-- LEFT STATEMENT COLUMN -->
+                    <div class="hero-statement">
+                        
+                        <div class="hero-kicker-row">
+                            <span class="kicker-line"></span>
+                            <span>[ 00 // SYSTEM CORE ] — ALAPPUZHA, KERALA, INDIA</span>
+                        </div>
+
+                        <h1 class="hero-title">
+                            ORDER IN THE<br>
+                            <span class="amber-word">CHAOS.</span><br>
+                            <span class="text-outline">PYTHON &amp; DJANGO</span>
+                        </h1>
+
+                        <div class="hero-role-badge">
+                            Python Developer <span>//</span> Django &amp; SQL Full-Stack
+                        </div>
+
+                        <p class="hero-manifesto">
+                            BCA Graduate (CGPA: 7.219) &amp; Python Full Stack Development with AI trainee at <strong>SMEC Technologies</strong>. Hands-on experience engineering <strong>Python, Django, Django REST Framework (DRF), and SQL (MySQL, PostgreSQL, SQLite)</strong>. Built production REST APIs, Simple JWT auth, and database-driven web applications with React on frontend.
+                        </p>
+
+                        <!-- INTERACTIVE SHOCK PROMPT -->
+                        <div class="hero-interaction-strip trigger-shock-btn" data-cursor="DISRUPT">
+                            <span class="shock-trigger-ring"></span>
+                            <span class="interaction-text">
+                                [ <b>ONE CLICK SETS OFF THE SHOCK</b> ] — PRESS &amp; HOLD TO BREAK ORDER
+                            </span>
+                        </div>
+
+                        <!-- HERO ACTIONS -->
+                        <div class="hero-actions">
+                            <a href="#skills" class="btn-primary-kinetic" data-cursor="EXPLORE">
+                                <span>Explore Arsenal</span>
+                                <span class="btn-arrow">↗</span>
+                            </a>
+
+                            <button class="btn-ghost-cyber trigger-shock-btn" data-cursor="SHOCK">
+                                <span>Disrupt Matrix</span>
+                                <span>⚡</span>
+                            </button>
+
+                            <a href="#contact" class="btn-ghost-cyber" data-cursor="CONNECT">
+                                <span>Initiate Comms</span>
+                                <span>↘</span>
+                            </a>
+                        </div>
+
+                        <!-- SOCIAL BADGES -->
+                        <div class="hero-socials">
+                            <a href="https://github.com/sreeraj02" target="_blank" rel="noopener noreferrer" class="social-pill" data-cursor="GITHUB">
+                                <span class="badge">GH</span>
+                                <span>github.com/sreeraj02</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/sreeraj-r-258a42363/" target="_blank" rel="noopener noreferrer" class="social-pill" data-cursor="LINKEDIN">
+                                <span class="badge">IN</span>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://leetcode.com/u/zjSgtPGvkh/" target="_blank" rel="noopener noreferrer" class="social-pill" data-cursor="LEETCODE">
+                                <span class="badge">LC</span>
+                                <span>LeetCode</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <!-- RIGHT COLUMN // COCKPIT, 3D LOOP & LIVE CODE RUNNER -->
+                    <div class="hero-cockpit">
+
+                        <!-- 3D INFINITE LOOP (CHAOS TO ORDER) -->
+                        <div class="hero-3d-wrapper" id="hero-3d-wrapper" data-cursor="DRAG 3D">
+                            <!-- Corner Crosshairs -->
+                            <span class="corner-crosshair cross-tl">+</span>
+                            <span class="corner-crosshair cross-tr">+</span>
+                            <span class="corner-crosshair cross-bl">+</span>
+                            <span class="corner-crosshair cross-br">+</span>
+
+                            <div class="loop-hud-badge">
+                                <span class="status-beacon"></span>
+                                <span>3D INFINITE LOOP // CHAOS TO ORDER</span>
+                            </div>
+                            
+                            <canvas id="three-loop-canvas"></canvas>
+                            
+                            <div class="loop-hint">[ DRAG TO ROTATE // CLICK TO SHOCK ]</div>
+                        </div>
+
+                        <!-- THE CODE TERMINAL -->
+                        <div class="cockpit-terminal">
+                            <!-- Corner Crosshairs -->
+                            <span class="corner-crosshair cross-tl">+</span>
+                            <span class="corner-crosshair cross-tr">+</span>
+                            <span class="corner-crosshair cross-bl">+</span>
+                            <span class="corner-crosshair cross-br">+</span>
+
+                            <div class="terminal-topbar">
+                                <div class="terminal-dots">
+                                    <span class="terminal-dot dot-red"></span>
+                                    <span class="terminal-dot dot-yellow"></span>
+                                    <span class="terminal-dot dot-green"></span>
+                                </div>
+
+                                <div class="terminal-tabs">
+                                    <button class="terminal-tab active" data-tab="developer.py" data-cursor="SWITCH">developer.py</button>
+                                    <button class="terminal-tab" data-tab="pos_billing.py" data-cursor="SWITCH">pos_billing.py</button>
+                                    <button class="terminal-tab" data-tab="database.sql" data-cursor="SWITCH">database.sql</button>
+                                    <button class="terminal-tab" data-tab="pos_client.jsx" data-cursor="SWITCH">pos_client.jsx</button>
+                                </div>
+
+                                <div class="terminal-tools">
+                                    <button id="run-code-btn" class="run-code-btn" data-cursor="EXECUTE">
+                                        <span>EXECUTE</span>
+                                        <span>▶</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <pre class="terminal-code-body"><code id="code-display"><span class="syntax-keyword">class</span> <span class="syntax-class">SreerajR</span>:
+    <span class="syntax-prop">name</span> = <span class="syntax-str">"Sreeraj R"</span>
+    <span class="syntax-prop">role</span> = <span class="syntax-str">"Python Developer | Django &amp; SQL"</span>
+    <span class="syntax-prop">education</span> = <span class="syntax-str">"BCA Graduate 2026 (CGPA: 7.219)"</span>
+    <span class="syntax-prop">location</span> = <span class="syntax-str">"Alappuzha, Kerala, India"</span>
+    <span class="syntax-prop">status</span> = <span class="syntax-str">"Available for Opportunities"</span>
+
+    <span class="syntax-prop">stack</span> = [
+        <span class="syntax-str">"Python"</span>, <span class="syntax-str">"Django"</span>, <span class="syntax-str">"Django REST (DRF)"</span>,
+        <span class="syntax-str">"PostgreSQL"</span>, <span class="syntax-str">"MySQL"</span>, <span class="syntax-str">"React (Vite)"</span>
+    ]
+
+    <span class="syntax-prop">projects</span> = {
+        <span class="syntax-str">"POS_Billing"</span>: <span class="syntax-str">"Retail Billing &amp; Inventory (github.com/sreeraj02/Billing-POS)"</span>,
+        <span class="syntax-str">"Freelance_Platform"</span>: <span class="syntax-str">"Company-Freelancer Web App (github.com/sreeraj02)"</span>
+    }
+
+    <span class="syntax-keyword">def</span> <span class="syntax-func">build_solutions</span>(self, chaos_input):
+        <span class="syntax-comment"># Transforming computational chaos into deterministic order</span>
+        structure = self.parse_logic(chaos_input)
+        <span class="syntax-keyword">return</span> structure.optimize()</code></pre>
+
+                            <!-- Interactive Execution Output Area -->
+                            <div id="terminal-output" class="terminal-console-output"></div>
+                        </div>
+
+                        <!-- TELEMETRY STATS TILES -->
+                        <div class="cockpit-stats-grid">
+                            <div class="telemetry-tile">
+                                <span class="tile-number">2026</span>
+                                <span class="tile-label">BCA Graduate</span>
+                            </div>
+
+                            <div class="telemetry-tile">
+                                <span class="tile-number">7.22</span>
+                                <span class="tile-label">CGPA UIT Adoor</span>
+                            </div>
+
+                            <div class="telemetry-tile">
+                                <span class="tile-number">03</span>
+                                <span class="tile-label">Full Stack Apps</span>
+                            </div>
+
+                            <div class="telemetry-tile">
+                                <span class="tile-number">100<span>%</span></span>
+                                <span class="tile-label">Deterministic</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 INFINITE MOVING MARQUEE TICKER (KINETIC RIBBON)
+                 =========================================================== -->
+            <div class="marquee-ticker-strip" aria-hidden="true">
+                <div class="marquee-track">
+                    <div class="marquee-text-block">
+                        ORDER IN THE CHAOS <span>✦</span> PYTHON DEVELOPER <span>✦</span> DJANGO &amp; DRF <span>✦</span> DETERMINISTIC LOGIC <span>✦</span> POSTGRESQL &amp; MYSQL <span>✦</span> REACT VITE <span>✦</span> SIMPLE JWT <span>✦</span> SWAGGER OPENAPI <span>✦</span> ALAPPUZHA, KERALA <span>✦</span> LEETCODE PROBLEM SOLVING <span>✦</span>
+                    </div>
+                    <div class="marquee-text-block">
+                        ORDER IN THE CHAOS <span>✦</span> PYTHON DEVELOPER <span>✦</span> DJANGO &amp; DRF <span>✦</span> DETERMINISTIC LOGIC <span>✦</span> POSTGRESQL &amp; MYSQL <span>✦</span> REACT VITE <span>✦</span> SIMPLE JWT <span>✦</span> SWAGGER OPENAPI <span>✦</span> ALAPPUZHA, KERALA <span>✦</span> LEETCODE PROBLEM SOLVING <span>✦</span>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ===========================================================
+                 01 // WHAT I DO (CAPABILITIES & ARCHITECTURE)
+                 =========================================================== -->
+            <section id="about" class="section-stage">
+                <div class="container">
+                    
+                    <div class="section-hud-header">
+                        <div class="section-indicator">01 // WHAT I DO</div>
+                        <h2 class="section-title">
+                            CAPABILITIES <span class="text-dimmed">&amp; ARCHITECTURE.</span>
+                        </h2>
+                        <p class="section-description">
+                            Eliminating friction to engineer deterministic, high-efficiency software solutions across the full Python and web computational stack.
+                        </p>
+                    </div>
+
+                    <div class="capabilities-grid">
+                        
+                        <!-- CARD 01 -->
+                        <article class="capability-card" data-cursor="VIEW">
+                            <div class="card-index">
+                                <span>// 01</span>
+                                <span class="card-category-tag">SERVER ARCHITECTURE</span>
+                            </div>
+                            <h3>Python, Django &amp; DRF Engineering</h3>
+                            <p>
+                                Building production backend services with Python, Django, and Django REST Framework (DRF). Proficient with object-oriented programming (OOP), robust exception containment, modular architectures, and database-driven web applications.
+                            </p>
+                            <div class="capability-features">
+                                <span class="feat-tag">Python 3.x</span>
+                                <span class="feat-tag">Django</span>
+                                <span class="feat-tag">Django REST (DRF)</span>
+                                <span class="feat-tag">OOP Architecture</span>
+                                <span class="feat-tag">CRUD Operations</span>
+                            </div>
+                        </article>
+
+                        <!-- CARD 02 -->
+                        <article class="capability-card" data-cursor="VIEW">
+                            <div class="card-index">
+                                <span>// 02</span>
+                                <span class="card-category-tag">DATA FOUNDATION</span>
+                            </div>
+                            <h3>Relational Databases &amp; SQL</h3>
+                            <p>
+                                Relational modeling across PostgreSQL, MySQL, and SQLite. Designing normalized schemas, complex joins, subqueries, integrity constraints, primary/foreign keys, and aggregate reporting functions.
+                            </p>
+                            <div class="capability-features">
+                                <span class="feat-tag">PostgreSQL</span>
+                                <span class="feat-tag">MySQL</span>
+                                <span class="feat-tag">SQLite</span>
+                                <span class="feat-tag">Complex Joins</span>
+                                <span class="feat-tag">Subqueries</span>
+                                <span class="feat-tag">RDBMS Concepts</span>
+                            </div>
+                        </article>
+
+                        <!-- CARD 03 -->
+                        <article class="capability-card" data-cursor="VIEW">
+                            <div class="card-index">
+                                <span>// 03</span>
+                                <span class="card-category-tag">CLIENT INTERFACE</span>
+                            </div>
+                            <h3>Modern Frontend &amp; React (Vite)</h3>
+                            <p>
+                                Crafting resilient single-page applications and responsive client interfaces using React (Vite), modern ES6+ JavaScript, semantic HTML5, CSS3, Bootstrap, and Axios for seamless API integration.
+                            </p>
+                            <div class="capability-features">
+                                <span class="feat-tag">React (Vite)</span>
+                                <span class="feat-tag">JavaScript (ES6+)</span>
+                                <span class="feat-tag">HTML5 / CSS3</span>
+                                <span class="feat-tag">Axios</span>
+                                <span class="feat-tag">React Router</span>
+                                <span class="feat-tag">Bootstrap</span>
+                            </div>
+                        </article>
+
+                        <!-- CARD 04 -->
+                        <article class="capability-card" data-cursor="VIEW">
+                            <div class="card-index">
+                                <span>// 04</span>
+                                <span class="card-category-tag">SECURE APIS &amp; DEVOPS</span>
+                            </div>
+                            <h3>REST APIs, Auth &amp; Cloud Tooling</h3>
+                            <p>
+                                Architecting stateless JWT authentication (Simple JWT), API documentation via Swagger / OpenAPI (drf-spectacular), version control with Git/GitHub, basic AWS exposure, and Docker &amp; CI/CD concepts.
+                            </p>
+                            <div class="capability-features">
+                                <span class="feat-tag">REST API Dev</span>
+                                <span class="feat-tag">Simple JWT</span>
+                                <span class="feat-tag">Swagger / OpenAPI</span>
+                                <span class="feat-tag">Git &amp; GitHub</span>
+                                <span class="feat-tag">Basic AWS</span>
+                            </div>
+                        </article>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ===========================================================
+                 02 // THE PATH (PERCORSO & TIMELINE)
+                 =========================================================== -->
+            <section id="path" class="section-stage">
+                <div class="container">
+
+                    <div class="section-hud-header">
+                        <div class="section-indicator">02 // THE PATH</div>
+                        <h2 class="section-title">
+                            CHRONOLOGY <span class="text-dimmed">&amp; MILESTONES.</span>
+                        </h2>
+                        <p class="section-description">
+                            A structured progression of formal computer applications education, industry full-stack training, and certified design systems.
+                        </p>
+                    </div>
+
+                    <div class="path-timeline">
+
+                        <!-- CHAPTER 01 -->
+                        <div class="path-chapter">
+                            <div class="chapter-node">01</div>
+                            <article class="chapter-card" data-cursor="CHAPTER">
+                                <div class="chapter-header">
+                                    <span class="chapter-badge">DEGREE COMPLETED // CGPA: 7.219</span>
+                                    <span class="chapter-date">2023 – 2026</span>
+                                </div>
+                                <h3 class="chapter-title">Bachelor of Computer Applications (BCA)</h3>
+                                <div class="chapter-subtitle">University Institute of Technology, Adoor</div>
+                                <p class="chapter-body">
+                                    Completed BCA with a CGPA of 7.219, establishing rigorous academic and practical foundations in programming paradigms, relational database systems, C/C++ algorithmic problem solving, and software engineering principles.
+                                </p>
+                            </article>
+                        </div>
+
+                        <!-- CHAPTER 02 -->
+                        <div class="path-chapter">
+                            <div class="chapter-node">02</div>
+                            <article class="chapter-card" data-cursor="CHAPTER">
+                                <div class="chapter-header">
+                                    <span class="chapter-badge">INDUSTRY INTERNSHIP &amp; TRAINING</span>
+                                    <span class="chapter-date">JUNE 2026 – PRESENT</span>
+                                </div>
+                                <h3 class="chapter-title">Python Full Stack Development with AI Trainee</h3>
+                                <div class="chapter-subtitle">SMEC Technologies</div>
+                                <p class="chapter-body">
+                                    Hands-on intensive training engineering REST APIs in Python, Django, and Django REST Framework. Developing database-driven applications with PostgreSQL, MySQL, and SQLite, mastering Git/GitHub, basic AWS deployment, React frontend integration, and emerging AI concepts.
+                                </p>
+                            </article>
+                        </div>
+
+                        <!-- CHAPTER 03 -->
+                        <div class="path-chapter">
+                            <div class="chapter-node">03</div>
+                            <article class="chapter-card" data-cursor="CHAPTER">
+                                <div class="chapter-header">
+                                    <span class="chapter-badge">GOVERNMENT CERTIFICATION</span>
+                                    <span class="chapter-date">COMPLETED</span>
+                                </div>
+                                <h3 class="chapter-title">Government Graphic Designing Course</h3>
+                                <div class="chapter-subtitle">Visual Communication &amp; Design Architecture</div>
+                                <p class="chapter-body">
+                                    Completed formal government training in visual hierarchy, typography, spatial layout structure, color theory, and digital interface design, applying strict visual precision to frontend engineering.
+                                </p>
+                            </article>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ===========================================================
+                 03 // TECH MATRIX (TECHNICAL ARSENAL ACCORDING TO RESUME)
+                 =========================================================== -->
+            <section id="skills" class="section-stage">
+                <div class="container">
+
+                    <div class="section-hud-header">
+                        <div class="section-indicator">03 // TECH MATRIX</div>
+                        <h2 class="section-title">
+                            TECHNICAL <span class="text-dimmed">ARSENAL.</span>
+                        </h2>
+                        <p class="section-description">
+                            Complete technical skill matrix curated directly from verified engineering experience across Python, Django, relational SQL, REST APIs, and full-stack environments.
+                        </p>
+                    </div>
+
+                    <div class="matrix-layout">
+
+                        <!-- BLOCK 1: CORE LANGUAGE METRICS -->
+                        <div class="matrix-block">
+                            <div class="matrix-block-head">
+                                <h3>Core Proficiencies</h3>
+                                <span>[ VERIFIED // METRICS ]</span>
+                            </div>
+
+                            <div class="skill-metrics">
+                                
+                                <div class="metric-row">
+                                    <div class="metric-meta">
+                                        <span class="metric-name">Python, Django &amp; DRF (REST APIs, OOP, JWT)</span>
+                                        <span class="metric-val">90%</span>
+                                    </div>
+                                    <div class="metric-track">
+                                        <div class="metric-fill" style="width: 90%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="metric-row">
+                                    <div class="metric-meta">
+                                        <span class="metric-name">SQL (MySQL, PostgreSQL, SQLite, Joins)</span>
+                                        <span class="metric-val">88%</span>
+                                    </div>
+                                    <div class="metric-track">
+                                        <div class="metric-fill" style="width: 88%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="metric-row">
+                                    <div class="metric-meta">
+                                        <span class="metric-name">Frontend: React (Vite), JavaScript, HTML5/CSS3</span>
+                                        <span class="metric-val">85%</span>
+                                    </div>
+                                    <div class="metric-track">
+                                        <div class="metric-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="metric-row">
+                                    <div class="metric-meta">
+                                        <span class="metric-name">REST APIs, Simple JWT &amp; Swagger (OpenAPI)</span>
+                                        <span class="metric-val">85%</span>
+                                    </div>
+                                    <div class="metric-track">
+                                        <div class="metric-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="metric-row">
+                                    <div class="metric-meta">
+                                        <span class="metric-name">C &amp; C++ (Algorithmic Logic &amp; Memory)</span>
+                                        <span class="metric-val">75%</span>
+                                    </div>
+                                    <div class="metric-track">
+                                        <div class="metric-fill" style="width: 75%;"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- BLOCK 2: TOOLS & RUNTIMES SHOWCASE -->
+                        <div class="matrix-block">
+                            <div class="matrix-block-head">
+                                <h3>Tools &amp; Environment</h3>
+                                <span>[ WORKSPACE // INFRA ]</span>
+                            </div>
+
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                                Industry tooling employed for deterministic version control, database inspection, and continuous deployment.
+                            </p>
+
+                            <div class="tools-showcase">
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Python 3.12</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Django</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Django REST (DRF)</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> React (Vite)</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> PostgreSQL</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> MySQL</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> SQLite</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Simple JWT</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Swagger / OpenAPI</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Git &amp; GitHub</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Basic AWS</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Docker (learning)</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> CI/CD (learning)</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Visual Studio Code</span>
+                                <span class="tool-chip" data-cursor="TOOL"><b>#</b> Browser DevTools</span>
+                            </div>
+                        </div>
+
+                        <!-- 6 DEDICATED RESUME SKILL CATEGORIES -->
+                        <div class="resume-skills-grid">
+                            
+                            <!-- CAT 01 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 01 FRAMEWORKS</span>
+                                        <span class="skill-cat-icon">⚡</span>
+                                    </div>
+                                    <h4>Programming &amp; Frameworks</h4>
+                                    <p class="skill-cat-desc">
+                                        Core server logic in Python, enterprise web architecture in Django &amp; DRF, object-oriented design, and algorithms in C/C++.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">Python</span>
+                                    <span class="skill-badge highlight">Django</span>
+                                    <span class="skill-badge highlight">Django REST (DRF)</span>
+                                    <span class="skill-badge">OOP</span>
+                                    <span class="skill-badge">C</span>
+                                    <span class="skill-badge">C++</span>
+                                </div>
+                            </div>
+
+                            <!-- CAT 02 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 02 FRONTEND</span>
+                                        <span class="skill-cat-icon">◈</span>
+                                    </div>
+                                    <h4>Frontend &amp; React</h4>
+                                    <p class="skill-cat-desc">
+                                        Reactive single-page web applications, responsive user interfaces, and seamless asynchronous state communication.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">React (Vite)</span>
+                                    <span class="skill-badge">JavaScript</span>
+                                    <span class="skill-badge">HTML5</span>
+                                    <span class="skill-badge">CSS3</span>
+                                    <span class="skill-badge">Bootstrap</span>
+                                    <span class="skill-badge">Axios</span>
+                                    <span class="skill-badge">React Router</span>
+                                </div>
+                            </div>
+
+                            <!-- CAT 03 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 03 DATABASES</span>
+                                        <span class="skill-cat-icon">⛁</span>
+                                    </div>
+                                    <h4>Databases &amp; RDBMS</h4>
+                                    <p class="skill-cat-desc">
+                                        Relational schema design, complex joins, subqueries, integrity constraints, and aggregate reporting functions.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">SQL</span>
+                                    <span class="skill-badge highlight">MySQL</span>
+                                    <span class="skill-badge highlight">PostgreSQL</span>
+                                    <span class="skill-badge">SQLite</span>
+                                    <span class="skill-badge">Complex Joins</span>
+                                    <span class="skill-badge">Subqueries</span>
+                                    <span class="skill-badge">Aggregate Functions</span>
+                                </div>
+                            </div>
+
+                            <!-- CAT 04 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 04 APIS &amp; AUTH</span>
+                                        <span class="skill-cat-icon">🔒</span>
+                                    </div>
+                                    <h4>REST APIs &amp; Formats</h4>
+                                    <p class="skill-cat-desc">
+                                        Secure API development, stateless token authentication with Simple JWT, and interactive Swagger documentation.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">REST API Dev</span>
+                                    <span class="skill-badge">API Integration</span>
+                                    <span class="skill-badge highlight">Simple JWT</span>
+                                    <span class="skill-badge">JSON / XML</span>
+                                    <span class="skill-badge">CRUD</span>
+                                    <span class="skill-badge">Swagger / OpenAPI</span>
+                                </div>
+                            </div>
+
+                            <!-- CAT 05 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 05 CLOUD &amp; DEVOPS</span>
+                                        <span class="skill-cat-icon">☁</span>
+                                    </div>
+                                    <h4>Cloud &amp; Version Control</h4>
+                                    <p class="skill-cat-desc">
+                                        Source code versioning with Git/GitHub, cloud hosting on AWS, application deployment, and continuous learning in Docker &amp; CI/CD.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">Git</span>
+                                    <span class="skill-badge highlight">GitHub</span>
+                                    <span class="skill-badge">Basic AWS</span>
+                                    <span class="skill-badge">Deployment</span>
+                                    <span class="skill-badge">Docker (learning)</span>
+                                    <span class="skill-badge">CI/CD (learning)</span>
+                                </div>
+                            </div>
+
+                            <!-- CAT 06 -->
+                            <div class="skill-category-card">
+                                <div>
+                                    <div class="skill-cat-head">
+                                        <span class="skill-cat-tag">// 06 PROBLEM SOLVING</span>
+                                        <span class="skill-cat-icon">λ</span>
+                                    </div>
+                                    <h4>Debugging &amp; Problem-Solving</h4>
+                                    <p class="skill-cat-desc">
+                                        Browser DevTools inspection, system diagnostics, defensive error handling, and continuous LeetCode algorithmic practice.
+                                    </p>
+                                </div>
+                                <div class="skill-pills-wrap">
+                                    <span class="skill-badge highlight">Browser DevTools</span>
+                                    <span class="skill-badge">Troubleshooting</span>
+                                    <span class="skill-badge">Error Handling</span>
+                                    <span class="skill-badge highlight">LeetCode Practice</span>
+                                    <span class="skill-badge">VS Code</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ===========================================================
+                 04 // SELECTED PLATFORMS, CODEBASE & PROJECTS
+                 =========================================================== -->
+            <section id="platforms" class="section-stage">
+                <div class="container">
+
+                    <div class="section-hud-header">
+                        <div class="section-indicator">04 // PRODUCTION CODEBASE &amp; PROFILES</div>
+                        <h2 class="section-title">
+                            REPOSITORIES <span class="text-dimmed">&amp; PROJECTS.</span>
+                        </h2>
+                        <p class="section-description">
+                            Featured software projects developed across Python, Django, REST APIs, and React, alongside verified developer profiles.
+                        </p>
+                    </div>
+
+                    <!-- THREE RESUME PRODUCTION PROJECTS -->
+                    <div class="projects-grid">
+                        
+                        <!-- PROJECT 01: POS BILLING -->
+                        <article class="project-card" data-cursor="VIEW">
+                            <div class="project-top">
+                                <span class="project-badge">FULL STACK SYSTEM</span>
+                                <a href="https://github.com/sreeraj02/Billing-POS" target="_blank" rel="noopener noreferrer" style="color: var(--accent-amber); font-family: var(--font-mono); font-size: 0.8rem;">
+                                    GITHUB REPO ↗
+                                </a>
+                            </div>
+                            <h3>POS Billing Software</h3>
+                            <div class="project-tagline">Retail Billing &amp; Inventory Management System</div>
+                            <p>
+                                Built REST APIs across four Django apps (accounts, inventory, suppliers, sales). Implemented JWT authentication with admin and staff roles, billing, stock, suppliers, returns, reports, and ledger modules. Documented with Swagger and built a React (Vite) admin UI via Axios.
+                            </p>
+                            <div class="project-stack-tags">
+                                <span class="project-stack-tag">Python</span>
+                                <span class="project-stack-tag">Django</span>
+                                <span class="project-stack-tag">DRF</span>
+                                <span class="project-stack-tag">Simple JWT</span>
+                                <span class="project-stack-tag">SQLite</span>
+                                <span class="project-stack-tag">Swagger</span>
+                                <span class="project-stack-tag">React (Vite)</span>
+                                <span class="project-stack-tag">Axios</span>
+                            </div>
+                            <a href="https://github.com/sreeraj02/Billing-POS" target="_blank" rel="noopener noreferrer" class="project-footer-link">
+                                <span>Inspect Repository (github.com/sreeraj02/Billing-POS)</span>
+                                <span>↗</span>
+                            </a>
+                        </article>
+
+                        <!-- PROJECT 02: FREELANCE WORKPLACE -->
+                        <article class="project-card" data-cursor="VIEW">
+                            <div class="project-top">
+                                <span class="project-badge">PROJECT LEADER // 2 MOS</span>
+                                <a href="https://github.com/sreeraj02" target="_blank" rel="noopener noreferrer" style="color: var(--accent-amber); font-family: var(--font-mono); font-size: 0.8rem;">
+                                    GITHUB ↗
+                                </a>
+                            </div>
+                            <h3>Freelance Workplace</h3>
+                            <div class="project-tagline">Freelancing &amp; Company Collaboration Platform</div>
+                            <p>
+                                Developed a web application connecting freelancers and companies, leading the project end-to-end. Built backend functionality with Django and integrated MySQL for database management, with direct messaging, project bidding, and interaction modules.
+                            </p>
+                            <div class="project-stack-tags">
+                                <span class="project-stack-tag">Python</span>
+                                <span class="project-stack-tag">Django</span>
+                                <span class="project-stack-tag">MySQL</span>
+                                <span class="project-stack-tag">HTML5 / CSS3</span>
+                                <span class="project-stack-tag">JavaScript</span>
+                            </div>
+                            <a href="https://github.com/sreeraj02" target="_blank" rel="noopener noreferrer" class="project-footer-link">
+                                <span>Inspect On GitHub (github.com/sreeraj02)</span>
+                                <span>↗</span>
+                            </a>
+                        </article>
+
+                    </div>
+
+                    <!-- DEVELOPER PLATFORMS (GITHUB, LEETCODE, LINKEDIN) -->
+                    <div class="profiles-grid">
+
+                        <!-- GITHUB SPOTLIGHT (REQUESTED: https://github.com/sreeraj02) -->
+                        <a href="https://github.com/sreeraj02" target="_blank" rel="noopener noreferrer" class="profile-spotlight-card" data-cursor="GITHUB">
+                            <div>
+                                <div class="platform-head">
+                                    <span class="platform-tag">// 01 GITHUB REPOSITORIES</span>
+                                    <span class="platform-arrow">↗</span>
+                                </div>
+                                <h3>GitHub Profile &amp; Codebase</h3>
+                                <p>
+                                    Primary repository hub housing full-stack Django projects, DRF REST API backends, React applications, and database solutions under continuous Git version management.
+                                </p>
+                            </div>
+                            <div class="platform-meta">
+                                <span>USER: @sreeraj02</span>
+                                <span>GITHUB.COM/SREERAJ02 ↗</span>
+                            </div>
+                        </a>
+
+                        <!-- LEETCODE SPOTLIGHT -->
+                        <a href="https://leetcode.com/u/zjSgtPGvkh/" target="_blank" rel="noopener noreferrer" class="profile-spotlight-card" data-cursor="LEETCODE">
+                            <div>
+                                <div class="platform-head">
+                                    <span class="platform-tag">// 02 LEETCODE PRACTICE</span>
+                                    <span class="platform-arrow">↗</span>
+                                </div>
+                                <h3>Algorithmic Problem Solving</h3>
+                                <p>
+                                    Consistent practice solving data structures, array algorithms, string parsing, and analytical problem-solving challenges in Python.
+                                </p>
+                            </div>
+                            <div class="platform-meta">
+                                <span>PROFILE: @zjSgtPGvkh</span>
+                                <span>VIEW LEETCODE ↗</span>
+                            </div>
+                        </a>
+
+                        <!-- LINKEDIN SPOTLIGHT -->
+                        <a href="https://www.linkedin.com/in/sreeraj-r-258a42363/" target="_blank" rel="noopener noreferrer" class="profile-spotlight-card" data-cursor="LINKEDIN">
+                            <div>
+                                <div class="platform-head">
+                                    <span class="platform-tag">// 03 LINKEDIN NETWORK</span>
+                                    <span class="platform-arrow">↗</span>
+                                </div>
+                                <h3>Professional Network</h3>
+                                <p>
+                                    Connect regarding entry-level Python Developer, Django, or Full-Stack engineering opportunities in Kochi, Kerala, or remote positions.
+                                </p>
+                            </div>
+                            <div class="platform-meta">
+                                <span>NETWORK: Sreeraj R.</span>
+                                <span>CONNECT ON LINKEDIN ↗</span>
+                            </div>
+                        </a>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- ===========================================================
+                 05 // INITIATE COMMS (LET'S TALK)
+                 =========================================================== -->
+            <section id="contact" class="section-stage">
+                <div class="container">
+
+                    <div class="section-hud-header">
+                        <div class="section-indicator">05 // SECURE TRANSMISSION</div>
+                        <h2 class="section-title">
+                            INITIATE <span class="text-dimmed">CONTACT.</span>
+                        </h2>
+                        <p class="section-description">
+                            Have an opening, internship, or project requirement? Connect directly or dispatch a transmission through the telemetry console below.
+                        </p>
+                    </div>
+
+                    <div class="contact-console-grid">
+
+                        <!-- LEFT: DIRECT COMMS -->
+                        <div class="contact-meta-col">
+                            
+                            <div class="direct-comms-list">
+                                
+                                <a href="mailto:sreerajesh619@gmail.com" class="comm-link-card" data-cursor="EMAIL">
+                                    <span class="comm-icon">@</span>
+                                    <div class="comm-content">
+                                        <span class="comm-label">DIRECT EMAIL</span>
+                                        <span class="comm-val">sreerajesh619@gmail.com</span>
+                                    </div>
+                                </a>
+
+                                <a href="tel:+917025591821" class="comm-link-card" data-cursor="CALL">
+                                    <span class="comm-icon">☎</span>
+                                    <div class="comm-content">
+                                        <span class="comm-label">TELEPHONE</span>
+                                        <span class="comm-val">+91 70255 91821</span>
+                                    </div>
+                                </a>
+
+                                <div class="comm-link-card">
+                                    <span class="comm-icon">📍</span>
+                                    <div class="comm-content">
+                                        <span class="comm-label">LOCATION</span>
+                                        <span class="comm-val">Alappuzha, Kerala, India (Seeking role in Kochi / Remote)</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <p style="color: var(--text-dim); font-size: 0.85rem; line-height: 1.6;">
+                                Available for entry-level Software Developer, Python Engineer, and Full-Stack Developer roles where I can learn rapidly and contribute deterministic value.
+                            </p>
+
+                        </div>
+
+                        <!-- RIGHT: CONTACT HUD FORM -->
+                        <div class="contact-hud-form">
+                            <!-- Corner Crosshairs -->
+                            <span class="corner-crosshair cross-tl">+</span>
+                            <span class="corner-crosshair cross-tr">+</span>
+                            <span class="corner-crosshair cross-bl">+</span>
+                            <span class="corner-crosshair cross-br">+</span>
+
+                            <div class="form-header-bar">
+                                <span style="font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text-muted);">
+                                    TELEMETRY DISPATCH CONSOLE
+                                </span>
+                                <div class="form-status-indicator">
+                                    <span class="status-beacon"></span>
+                                    <span>LINK ONLINE</span>
+                                </div>
+                            </div>
+
+                            <form id="contact-form" action="https://formspree.io/f/mwlenrne" method="POST">
+                                
+                                <!-- HIDDEN INTENT TRACKER -->
+                                <input type="hidden" id="selected-intent" name="intent" value="Full-Time Role">
+
+                                <div class="form-field-group">
+                                    
+                                    <!-- INTENT TOGGLES -->
+                                    <div class="intent-selector">
+                                        <span class="intent-label">Select Requirement Intent:</span>
+                                        <div class="intent-pills">
+                                            <span class="intent-pill active" data-intent="Full-Time Role">Full-Time Role</span>
+                                            <span class="intent-pill" data-intent="Internship">Internship</span>
+                                            <span class="intent-pill" data-intent="Project / Contract">Project / Contract</span>
+                                            <span class="intent-pill" data-intent="Say Hello">General Inquiry</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- NAME -->
+                                    <div class="hud-input-row">
+                                        <label for="hud-name" class="hud-label">Your Name / Organization</label>
+                                        <input type="text" id="hud-name" name="name" class="hud-input" placeholder="e.g. Alex Vance / Tech Corp" required>
+                                    </div>
+
+                                    <!-- EMAIL -->
+                                    <div class="hud-input-row">
+                                        <label for="hud-email" class="hud-label">Your Contact Email</label>
+                                        <input type="email" id="hud-email" name="email" class="hud-input" placeholder="name@domain.com" required>
+                                    </div>
+
+                                    <!-- MESSAGE -->
+                                    <div class="hud-input-row">
+                                        <label for="hud-message" class="hud-label">Transmission Message</label>
+                                        <textarea id="hud-message" name="message" class="hud-textarea" placeholder="Detail your role requirements or project vision..." required></textarea>
+                                    </div>
+
+                                    <!-- SUBMIT -->
+                                    <div class="form-submit-row">
+                                        <button type="submit" id="submit-btn" class="submit-hud-btn" data-cursor="SEND">
+                                            <span>Dispatch Transmission</span>
+                                            <span class="btn-arrow">↗</span>
+                                        </button>
+                                        <span class="form-legal-note">
+                                            Telemetry dispatched directly to sreerajesh619@gmail.com via encrypted endpoint.
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ===========================================================
+                 INFINITE MOVING MARQUEE TICKER (KINETIC RIBBON)
+                 =========================================================== -->
+            <div class="marquee-ticker-strip" aria-hidden="true">
+                <div class="marquee-track">
+                    <div class="marquee-text-block">
+                        ORDER IN THE CHAOS <span>✦</span> PYTHON DEVELOPER <span>✦</span> DJANGO &amp; DRF <span>✦</span> DETERMINISTIC LOGIC <span>✦</span> POSTGRESQL &amp; MYSQL <span>✦</span> REACT VITE <span>✦</span> SIMPLE JWT <span>✦</span> SWAGGER OPENAPI <span>✦</span> ALAPPUZHA, KERALA <span>✦</span> LEETCODE PROBLEM SOLVING <span>✦</span>
+                    </div>
+                    <div class="marquee-text-block">
+                        ORDER IN THE CHAOS <span>✦</span> PYTHON DEVELOPER <span>✦</span> DJANGO &amp; DRF <span>✦</span> DETERMINISTIC LOGIC <span>✦</span> POSTGRESQL &amp; MYSQL <span>✦</span> REACT VITE <span>✦</span> SIMPLE JWT <span>✦</span> SWAGGER OPENAPI <span>✦</span> ALAPPUZHA, KERALA <span>✦</span> LEETCODE PROBLEM SOLVING <span>✦</span>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+
+        <!-- ===============================================================
+             FOOTER // ARCHITECTURE & TELEMETRY
+             =============================================================== -->
+        <footer class="hud-footer">
+            <div class="container">
+                
+                <div class="footer-top-grid">
+                    
+                    <div class="footer-brand-col">
+                        <a href="#home" class="callsign" data-cursor="HOME">
+                            SREERAJ<span>.R</span>
+                        </a>
+                        <p>
+                            Python Developer &amp; Full-Stack Developer creating order from computational chaos through deterministic logic, robust database design, and spatial interfaces.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="footer-col-title">Navigation</div>
+                        <div class="footer-links-list">
+                            <a href="#home" class="footer-link">00 // Core Home</a>
+                            <a href="#about" class="footer-link">01 // What I Do</a>
+                            <a href="#path" class="footer-link">02 // The Path</a>
+                            <a href="#skills" class="footer-link">03 // Tech Matrix</a>
+                            <a href="#platforms" class="footer-link">04 // Platforms</a>
+                            <a href="#contact" class="footer-link">05 // Initiate</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="footer-col-title">Stack</div>
+                        <div class="footer-links-list">
+                            <span class="footer-link">Python &amp; Django</span>
+                            <span class="footer-link">Django REST (DRF)</span>
+                            <span class="footer-link">PostgreSQL &amp; MySQL</span>
+                            <span class="footer-link">React (Vite) &amp; Axios</span>
+                            <span class="footer-link">Git, GitHub &amp; AWS</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="footer-col-title">Direct Comms</div>
+                        <div class="footer-links-list">
+                            <a href="mailto:sreerajesh619@gmail.com" class="footer-link">sreerajesh619@gmail.com</a>
+                            <a href="tel:+917025591821" class="footer-link">+91 70255 91821</a>
+                            <a href="https://github.com/sreeraj02" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile (github.com/sreeraj02) ↗</a>
+                            <a href="https://www.linkedin.com/in/sreeraj-r-258a42363/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn Profile ↗</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom-bar">
+                    <div>
+                        © 2026 SREERAJ R. — ALL RIGHTS RESERVED. // "ORDER IN THE CHAOS"
+                    </div>
+
+                    <a href="#home" id="back-to-top" class="back-to-top-btn" data-cursor="TOP">
+                        <span>RETURN TO APEX</span>
+                        <span>↑</span>
+                    </a>
+                </div>
+
+            </div>
+        </footer>
+
+
+        <!-- ===============================================================
+             FLOATING HUD DOCK
+             =============================================================== -->
+        <nav class="floating-hud-dock" aria-label="Quick Access Dock">
+            <a href="#about" class="dock-item" data-cursor="NAV">Capabilities</a>
+            <a href="#path" class="dock-item" data-cursor="NAV">Path</a>
+            <a href="#skills" class="dock-item" data-cursor="NAV">Matrix</a>
+            <a href="#contact" class="dock-item" data-cursor="NAV">Contact</a>
+            <button class="dock-shock-btn trigger-shock-btn" title="Disrupt particle matrix" data-cursor="SHOCK">
+                <span>SHOCK</span>
+                <span>⚡</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <!-- Application JavaScript Engine -->
+    <script src="script.js"></script>
+
+</body>
+</html>
